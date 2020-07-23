@@ -1,24 +1,26 @@
 from src.models.point import Point
+from src.models.battlesnake import Battlesnake
+
 FOOD = 5
 HEAD = 2
 BODY = 1
 EMPTY_SPACE = 0 
 
 
-def construct_food_snake_matrix(food, battlesnake):
-    matrix = [[EMPTY_SPACE for _ in board.width] for _ in board.height]
+def construct_food_snake_matrix(food, board, battlesnake):
+    matrix = [[EMPTY_SPACE for _ in range(board.width)] for _ in range(board.height)]
 
-    matrix[food.x][board.height - 1 - food.y] = FOOD
+    matrix[board.height - 1 - food.y][food.x] = FOOD
 
     for body in battlesnake.body:
-        matrix[body.x][board.height - 1 - body.y] = BODY
+        matrix[board.height - 1 - body.y][body.x] = BODY
 
-    matrix[battlesnake.head.x][board.height - 1 battlesnake.head.y] = HEAD
+    matrix[board.height - 1 - battlesnake.head.y][battlesnake.head.x] = HEAD
 
     return tuple(tuple(row) for row in matrix)
 
 def find_closest_food_to_snake(board, battlesnake):
-    min_distance_food_to_snake = float('int')
+    min_distance_food_to_snake = float('inf')
     closest_food = None
 
     for food in board.food:
@@ -37,25 +39,27 @@ def get_successors(matrix, board, battlesnake):
                 if i > 0 and matrix[i-1][j] != BODY:
                     head = Point(
                             x=j,
-                            y=board.height - 1 - i-1)
+                            y=board.height - 1 - (i-1))
                     successors.append(
                             Battlesnake(
                                 id=battlesnake.id,
                                 name=battlesnake.name,
                                 body=(head,) + battlesnake.body[:battlesnake.length - 1],
                                 head=head,
+                                health=battlesnake.health,
                                 length=battlesnake.length,
                                 shout=battlesnake.shout))
                 if i + 1 < board.height and matrix[i+1][j] != BODY:
                     head = Point(
                             x=j,
-                            y=board.height - 1 - i+1)
+                            y=board.height - 1 - (i+1))
                     successors.append(
                             Battlesnake(
                                 id=battlesnake.id,
                                 name=battlesnake.name,
                                 body=(head,) + battlesnake.body[:battlesnake.length - 1],
                                 head=head,
+                                health=battlesnake.health,
                                 length=battlesnake.length,
                                 shout=battlesnake.shout))
                 if j > 0 and matrix[i][j-1] != BODY:
@@ -68,6 +72,7 @@ def get_successors(matrix, board, battlesnake):
                                 name=battlesnake.name,
                                 body=(head,) + battlesnake.body[:battlesnake.length - 1],
                                 head=head,
+                                health=battlesnake.health,
                                 length=battlesnake.length,
                                 shout=battlesnake.shout))
                 if j + 1 < board.width and matrix[i][j+1] != BODY:
@@ -80,6 +85,7 @@ def get_successors(matrix, board, battlesnake):
                                 name=battlesnake.name,
                                 body=(head,) + battlesnake.body[:battlesnake.length - 1],
                                 head=head,
+                                health=battlesnake.health,
                                 length=battlesnake.length,
                                 shout=battlesnake.shout))
     return successors

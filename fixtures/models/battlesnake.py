@@ -77,3 +77,21 @@ def battlesnake():
             head=Point(x=0,y=0),
             length=3,
             shout="why are we shouting??")
+
+@pytest.fixture
+def battlesnake_successors():
+    return [
+            Battlesnake(
+                id="snake-508e96ac-94ad-11ea-bb37",
+                name="My Snake",
+                health=54,
+                body=(
+                    Point(x=0,y=1),
+                    Point(x=0,y=0),
+                    Point(x=1,y=0)),
+                head=Point(x=0,y=1),
+                length=3,
+                shout="why are we shouting??")
+            ]
+
+

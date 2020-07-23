@@ -98,3 +98,34 @@ def board():
                     head=Point(x=5,y=4),
                     length=4,
                     shout="I'm not really sure...")))
+@pytest.fixture
+def one_food_board():
+    return Board(
+            height=11,
+            width=11,
+            food=(
+                Point(x=5,y=5),),
+            snakes=(
+                Battlesnake(
+                    id="snake-508e96ac-94ad-11ea-bb37",
+                    name="My Snake",
+                    health=54,
+                    body=(
+                        Point(x=0,y=0),
+                        Point(x=1,y=0),
+                        Point(x=2,y=0)),
+                    head=Point(x=0,y=0),
+                    length=3,
+                    shout="why are we shouting??"),
+                Battlesnake(
+                    id="snake-b67f4906-94ae-11ea-bb37",
+                    name="Another Snake",
+                    health=16,
+                    body=(
+                        Point(x=5,y=4),
+                        Point(x=5,y=3),
+                        Point(x=6,y=3),
+                        Point(x=6,y=2)),
+                    head=Point(x=5,y=4),
+                    length=4,
+                    shout="I'm not really sure...")))
