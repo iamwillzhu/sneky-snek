@@ -3,4 +3,5 @@
 .cmd
 .idea
 .vscode
+*.swp
 env/

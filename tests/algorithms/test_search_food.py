@@ -1,4 +1,5 @@
-from src.utils.search_food import (
+from src.algorithms.search_food import (
+        search_food_bfs,
         construct_food_snake_matrix,
         find_closest_food_to_snake,
         get_successors)
@@ -43,3 +44,8 @@ class TestConstructFoodSnakeMatrix:
 class TestGetSuccessors:
     def test_battlesnake_successors(self, matrix, board, battlesnake, battlesnake_successors):
         assert(get_successors(matrix, board, battlesnake) == battlesnake_successors)
+
+class TestSearchFoodBfs:
+    def test_search_food_bfs(self, board, battlesnake):
+        assert(search_food_bfs(board, battlesnake) == "up")
+

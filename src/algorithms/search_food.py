@@ -6,6 +6,47 @@ HEAD = 2
 BODY = 1
 EMPTY_SPACE = 0 
 
+def bfs(food, board, battlesnake):
+    queue = []
+    queue.append([battlesnake])
+
+    while len(queue) != 0:
+        path = queue.pop(0)
+        node = path[-1]
+        matrix = construct_food_snake_matrix(food, board, node)
+
+        if 5 not in [val for row in matrix for val in row]:
+            return path
+
+        successors = get_successors(matrix, board, node)
+        for successor in successors:
+            new_path = list(path)
+            new_path.append(successor)
+            queue.append(new_path)
+
+    raise Exception("No path to food found")
+
+def search_food_bfs(board, battlesnake):
+
+    food = find_closest_food_to_snake(board, battlesnake)
+    path = bfs(food, board, battlesnake)
+    
+    current_pos = construct_food_snake_matrix(food, board, path[0])
+    next_pos = construct_food_snake_matrix(food, board, path[1])
+
+    for i in range(board.height):
+        for j in range(board.width):
+            if current_pos[i][j] == HEAD:
+                if i > 0 and next_pos[i-1][j] == HEAD:
+                    return "up"
+                elif i + 1 < board.height and next_pos[i+1][j] == HEAD:
+                    return "down"
+                elif j > 0 and next_pos[i][j-1] == HEAD:
+                    return "left"
+                elif j + 1 < board.width and next_pos[i][j+1] == HEAD:
+                    return "right"
+
+    raise Exception("No move returned")
 
 def construct_food_snake_matrix(food, board, battlesnake):
     matrix = [[EMPTY_SPACE for _ in range(board.width)] for _ in range(board.height)]
@@ -89,7 +130,3 @@ def get_successors(matrix, board, battlesnake):
                                 length=battlesnake.length,
                                 shout=battlesnake.shout))
     return successors
-
-
-
-                    
