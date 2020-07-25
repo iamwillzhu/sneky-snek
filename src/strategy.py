@@ -1,5 +1,6 @@
 from dataclasses import dataclass
 
+from src.algorithms.search_food import search_food_bfs
 from src.models.board import Board
 from src.models.battlesnake import Battlesnake
 
@@ -9,6 +10,10 @@ class Strategy:
     turn: int
     board: Board
     you: Battlesnake
+
+
+    def find_food(self):
+        return search_food_bfs(self.board, self.you)
 
 
     @classmethod
