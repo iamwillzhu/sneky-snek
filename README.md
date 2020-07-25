@@ -2,6 +2,8 @@
 
 Forked from the official Battlesnake repository [starter-snake-python](https://github.com/BattlesnakeOfficial/starter-snake-python)
 
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
+
 ### TODO
 - <del>Use BFS to find food
 
@@ -9,6 +11,7 @@ Forked from the official Battlesnake repository [starter-snake-python](https://g
 ## Finding Food And Next Steps
 
 ![snake moves out of bounds](documentation/out_of_bounds.gif)
+
 Snake finds food but dies by moving out of bounds. 
 
 <br />
@@ -16,11 +19,9 @@ Snake finds food but dies by moving out of bounds.
 
 
 ![snake traps itself](documentation/trap_itself.gif)
+
 Snake finds food but dies by trapping itself.
 
 ### TODO
 - Avoid moving out of bounds
 - Avoid/reduce chances of trapping itself.
-
-
-
