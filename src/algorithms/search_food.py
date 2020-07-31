@@ -58,6 +58,13 @@ def construct_food_snake_matrix(food, board, battlesnake):
 
     matrix[board.height - 1 - battlesnake.head.y][battlesnake.head.x] = HEAD
 
+    for snake in board.snakes:
+        if snake.id == battlesnake.id:
+            continue
+
+        for body in snake.body:
+            matrix[board.height - 1 - body.y][body.x] = BODY
+
     return tuple(tuple(row) for row in matrix)
 
 def find_closest_food_to_snake(board, battlesnake):
